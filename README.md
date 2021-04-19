@@ -35,3 +35,5 @@ BitBurner scripts
 * update list
   * list updater
 
+Someone's shiny early-mid hacky thing
+https://gist.github.com/jaguilar/a8f7cb8da78cbddc2a06415fdf97df27

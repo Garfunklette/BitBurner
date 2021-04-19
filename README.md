@@ -1,0 +1,2 @@
+# BitBurner
+BitBurner scripts

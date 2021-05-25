@@ -1,0 +1,36 @@
+// goal: have 25 servers with highest level ram we can afford
+// determine server size we can afford
+// open server slots?
+// find smallest server
+// determine if money enough to upgrade
+// determine largest size available by money
+// kill scripts on smallest
+// delete smallest server
+// purchase bigger server
+// make sure scripts running on all servers
+
+var serverList = getPurchasedServers();
+var slSize = [];
+var noServers = serverList.length;
+var money = getServerAvailableMoney("home");
+var minServerSize = 16;
+
+var maxServerCount = getMaxServerLimit()
+var buyCount = maxServerCount - noServers;
+
+//ram size check
+
+var serverCost = 0;
+var ramSize = 16;
+var replaceList = [];
+for (var i = 16; i < Math.pow(2,21); i*2) {
+    for (var j=0; j < noServers; j++) {
+      cServer = serverList[j];
+      serverRam = getServerRam(serverList[j];
+      if (serverRam < i ) {
+        buyCount++;
+        
+    }
+    
+
+

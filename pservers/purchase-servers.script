@@ -29,7 +29,7 @@ function getSmallestServer() {
 //the while loop
 while (serversAtMaxSize < getMaxServerLimit()) {
 
-    script = "targeted-early-hack-template";
+    script = "targeted-early-hack-template.script";
     scriptArgs = fLib.getTarget();
 
     var serverList = getPurchasedServers();

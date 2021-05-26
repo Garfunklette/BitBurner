@@ -29,13 +29,13 @@ function getSmallestServer() {
 //the while loop
 while (serversAtMaxSize < getMaxServerLimit()) {
 
-    script = "targeted-early-hack-template"
+    script = "targeted-early-hack-template";
     scriptArgs = fLib.getTarget();
 
     var serverList = getPurchasedServers();
     var noServers = serverList.length;
 
-    var maxServerCount = getMaxServerLimit()
+    var maxServerCount = getMaxServerLimit();
 
     var maxSize = getMaxServerSize();
     var minSize = 16;
@@ -47,8 +47,9 @@ while (serversAtMaxSize < getMaxServerLimit()) {
     for (h = 0, h < noServers) {
         var server = serverList[h];
         var serverRam = getServerMaxRam(server);
-        if serverRam = maxSize;
-        serversAtMaxSize++;
+        if (serverRam === maxSize) {
+           serversAtMaxSize++;
+        }
     }
 
     var money = getServerAvailableMoney("home");

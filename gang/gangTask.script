@@ -1,0 +1,23 @@
+//assign tasks based on member hack level, member level of respect, wantedLevelGainRate
+//remember to sleep for a few seconds to give it a chance to process
+//
+
+
+var gangList = gang.getMemberNames();
+
+for (i = 0; i < gangList.length; i++) {
+  var member = gang.getMemberInformation(gangList[i]);
+    var mTask = member.task;
+    var mHack = member.hack;
+  if(mHack < 100) {
+    if(mTask != "Train Hacking")
+        setTask(member.name,"Train Hacking");
+    }
+  }
+  else { 
+    //try a task and see if it ruins wantedLevelGainRate
+    //if can't do any task without ruining wanted level gain rate, set lower wantedLevelGainRate task
+    for (j = 0; j < taskList.length);
+  }
+  
+}

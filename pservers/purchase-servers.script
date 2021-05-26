@@ -9,6 +9,21 @@
 // purchase bigger server
 // make sure scripts running on all servers
 
+function getSmallestServer() {
+var serverList = getPurchasedServers();
+var serverCount = serverList.length;
+var smallestServer = serverList[0];
+var smallestServerRam = getServerMaxRam(smallestServer);
+
+for (i = 0; i < serverCount, i++) {
+    var server = serverList[i];
+    var serverRam = getServerMaxRam(server);
+    if (serverRam < smallestServer) {
+        smallestServer = server;
+    }
+return smallestServer;
+}
+
 var serverList = getPurchasedServers();
 var slSize = [];
 var noServers = serverList.length;

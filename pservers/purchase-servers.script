@@ -9,43 +9,80 @@
 // purchase bigger server
 // make sure scripts running on all servers
 
-function getSmallestServer() {
-var serverList = getPurchasedServers();
-var serverCount = serverList.length;
-var smallestServer = serverList[0];
-var smallestServerRam = getServerMaxRam(smallestServer);
+import * as fLib from "functionLibrary.script";
 
-for (i = 0; i < serverCount, i++) {
-    var server = serverList[i];
-    var serverRam = getServerMaxRam(server);
-    if (serverRam < smallestServer) {
-        smallestServer = server;
-    }
-return smallestServer;
+function getSmallestServer() {
+    var serverList = getPurchasedServers();
+    var serverCount = serverList.length;
+    var smallestServer = serverList[0];
+    var smallestServerRam = getServerMaxRam(smallestServer);
+
+    for (i = 0; i < serverCount, i++) {
+        var server = serverList[i];
+        var serverRam = getServerMaxRam(server);
+        if (serverRam < smallestServer) {
+            smallestServer = server;
+        }
+    return smallestServer;
 }
 
+//the while loop
+while (serversAtMaxSize < getMaxServerLimit()) {
+
+script = "targeted-early-hack-template"
+scriptArgs = fLib.getTarget();
+
 var serverList = getPurchasedServers();
-var slSize = [];
 var noServers = serverList.length;
-var money = getServerAvailableMoney("home");
-var minServerSize = 16;
 
 var maxServerCount = getMaxServerLimit()
-var buyCount = maxServerCount - noServers;
+
+var maxSize = getMaxServerSize();
+var minSize = 16;
+
+//count servers at maximum size
+
+var serversAtMaxSize = 0;
+
+for (h = 0, h < noServers) {
+    var server = serverList[h];
+    var serverRam = getServerMaxRam(server);
+    if serverRam = maxSize;
+    serversAtMaxSize++;
+}
+
+var money = getServerAvailableMoney("home");
 
 //ram size check
 
-var serverCost = 0;
 var ramSize = 16;
-var replaceList = [];
-for (var i = 16; i < Math.pow(2,21); i*2) {
-    for (var j=0; j < noServers; j++) {
-      cServer = serverList[j];
-      serverRam = getServerRam(serverList[j];
-      if (serverRam < i ) {
-        buyCount++;
-        
+
+for (k = maxSize; k > minSize; k/2) {
+if (getServerCost(k) < money) {
+ramSize = k;
+}
+
+// if space needed, delete smallest server
+
+if (serverCount === maxServerCount) {
+    var delServer = getSmallestServer();
+    if (getServerMaxRam(delServer) < ramSize) {
+        killall(delServer);
+        sleep(3000);
+        deleteServer(delServer);
+        serverCount--;
     }
+}
     
+if (serverCount < maxServerCount) {
+    var newServer = purchaseServer("serv"+ramSize+"GB",ramSize);
+    exec(script,newServer,fLib.threads(newServer,script),target);
+}
+
+sleep(30000);
+
+}
+
+
 
 

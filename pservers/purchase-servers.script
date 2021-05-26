@@ -81,6 +81,17 @@ while (serversAtMaxSize < getMaxServerLimit()) {
         exec(script, newServer, fLib.threads(newServer, script), target);
     }
 
-    sleep(30000);
 
+// sleep until smallest server is upgradeable
+    var newMoney = getServerMoneyAvailable("home");
+    var newSmallest = fLib.getSmallestServer();
+    var newSmallestRam = getServerMaxRam(newSmallest);
+        
+    while (getServerCost(newSmallestRam*2) < newMoney) {
+        newMoney = getServerMoneyAvailable("home");
+        newSmallest = fLib.getSmallestServer();
+        newSmallestRam = getServerMaxRam(newSmallest);
+
+        sleep(30000);
+        }
 }

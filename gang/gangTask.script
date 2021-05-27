@@ -36,14 +36,17 @@ var newWantedLevelGainRate = 0;
 
 // buy all rootKits for each gang member
 var rootKits = ["NUKE Rootkit","Soulstealer Rootkit","Demon Rootkit","Hmap Node","Jack the Ripper"];
+var augs = ["BitWire","Neuralstimulator","DataJack"];
 
 // set tasks based on skill level and gang wanted rate
 for (i = 0; i < memberCount; i++) {
   
 member = gang.getMemberInformation(gangList[i]);
 
-var equipmentList = member.upgrades;
-var toBuy = rootKits;
+var upgradeList = member.upgrades;
+var augList = member.augmentations;
+var equipmentList = concat(upgradeList,augList);
+var toBuy = concat(augs,rootKits);
 for (k = 0; k < toBuy.length; k++) {
   for (m = 0; m < equipmentList.length; m++) {
     if (toBuy[k] === equipmentList[m]) {

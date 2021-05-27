@@ -1,0 +1,31 @@
+function threadCount(scriptName, serverName) {
+    var scriptRam = getScriptRam(scriptName);
+    var freeRam = getServerMaxRam(serverName) - getServerUsedRam(serverName);
+    var threads = 0;
+    if (scriptRam > 0) {
+        threads = Math.floor(freeRam / scriptRam);
+    }
+    return threads;
+}
+
+function getTarget() {
+    var bestTarget = read("best_target.txt").split(",");
+    var tName = bestTarget[0];
+    return tName;
+}
+
+function getSmallestServer() {
+    var serverList = getPurchasedServers();
+    var serverCount = serverList.length;
+    var smallestServer = serverList[0];
+    var smallestServerRam = getServerMaxRam(smallestServer);
+
+    for (i = 0; i < serverCount; i++) {
+        var server = serverList[i];
+        var serverRam = getServerMaxRam(server);
+        if (serverRam < smallestServer) {
+            smallestServer = server;
+        }
+    }
+    return smallestServer;
+}

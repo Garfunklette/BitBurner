@@ -81,13 +81,14 @@ while (serversAtMaxSize < getPurchasedServerLimit()) {
     var serverCost = getPurchasedServerCost(maxSize);
     tprint("servercost: "+serverCost);
 
-    for (k = maxSize; serverCost < money; k = k / 2) {
-        serverCost = getPurchasedServerCost(k);
-        ramSize = k;
-        tprint("ram size:" + ramSize + ", k:" + k + ", server Cost" + serverCost);
+while (serverCost > money) {
+        serverCost = getPurchasedServerCost(ramSize);
+        if (serverCost > money) {
+        ramSize = ramSize / 2;
+        }
     }
-
-    tprint("ram size of new server: " + ramSize);
+    tprint("money: "+money+", ram size new server: " + ramSize + ", server Cost: " + serverCost);
+    
 
     // if space needed, delete smallest server
 

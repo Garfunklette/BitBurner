@@ -10,13 +10,14 @@
 // make sure scripts running on all servers
 import * as fLib from "functionLibrary.script";
 
-function getSmallestServer() {
+//moved function to functionLib.script
+/* getSmallestServer() {
     var serverList = getPurchasedServers();
     var serverCount = serverList.length;
     var smallestServer = serverList[0];
     var smallestServerRam = getServerMaxRam(smallestServer);
 
-    for (i = 0; i < serverCount, i++) {
+    for (i = 0; i < serverCount; i++) {
         var server = serverList[i];
         var serverRam = getServerMaxRam(server);
         if (serverRam < smallestServer) {
@@ -24,74 +25,104 @@ function getSmallestServer() {
         }
     }
     return smallestServer;
-}
+}*/
 
 //the while loop
-while (serversAtMaxSize < getMaxServerLimit()) {
+var serversAtMaxSize = 0;
 
-    script = "targeted-early-hack-template.script";
-    scriptArgs = fLib.getTarget();
+var serverList = getPurchasedServers();
+var serverCount = serverList.length;
 
-    var serverList = getPurchasedServers();
-    var noServers = serverList.length;
+var maxSize = Math.pow(2, 20);
+var minSize = 16;
 
-    var maxServerCount = getMaxServerLimit();
+for (h = 0; h < serverCount; h++) {
+    var server = serverList[h];
+    var serverRam = getServerMaxRam(server);
+    if (serverRam === maxSize) {
+        serversAtMaxSize++;
+    }
+}
 
-    var maxSize = getMaxServerSize();
-    var minSize = 16;
+while (serversAtMaxSize < getPurchasedServerLimit()) {
+
+    tprint("entered while loop. servers at max size: " + serversAtMaxSize);
+    var script = "targeted-early-hack-template.script";
+    var scriptArgs = fLib.getTarget();
+    tprint("target: " + scriptArgs);
+
+    serverList = getPurchasedServers();
+    serverCount = serverList.length;
+
+    var maxServerCount = getPurchasedServerLimit();
 
     //count servers at maximum size
 
-    var serversAtMaxSize = 0;
+    serversAtMaxSize = 0;
+    tprint("reset serversAtMaxSize to " + serversAtMaxSize);
 
-    for (h = 0, h < noServers) {
-        var server = serverList[h];
-        var serverRam = getServerMaxRam(server);
+    for (h = 0; h < serverCount; h++) {
+        server = serverList[h];
+        serverRam = getServerMaxRam(server);
         if (serverRam === maxSize) {
-           serversAtMaxSize++;
+            serversAtMaxSize++;
         }
     }
+    tprint("re-evaluated servers at max size: " + serversAtMaxSize);
 
-    var money = getServerAvailableMoney("home");
+    var money = getServerMoneyAvailable("home");
 
     //ram size check
 
-    var ramSize = 16;
+    var ramSize = maxSize;
 
-    for (k = maxSize; k > minSize; k / 2) {
-        if (getServerCost(k) < money) {
-            ramSize = k;
+    tprint("money: " + money + ", maxSize:" + maxSize + ", minSize: " + minSize);
+
+    var serverCost = getPurchasedServerCost(maxSize);
+    tprint("servercost: "+serverCost);
+
+while (serverCost > money) {
+        serverCost = getPurchasedServerCost(ramSize);
+        if (serverCost > money) {
+        ramSize = ramSize / 2;
         }
     }
+    tprint("money: "+money+", ram size new server: " + ramSize + ", server Cost: " + serverCost);
+    
 
     // if space needed, delete smallest server
 
     if (serverCount === maxServerCount) {
-        var delServer = getSmallestServer();
+        var delServer = fLib.getSmallestServer();
         if (getServerMaxRam(delServer) < ramSize) {
             killall(delServer);
             sleep(3000);
             deleteServer(delServer);
+            tprint("deleted server " + delServer);
             serverCount--;
         }
     }
 
     if (serverCount < maxServerCount) {
         var newServer = purchaseServer("serv" + ramSize + "GB", ramSize);
-        exec(script, newServer, fLib.threads(newServer, script), target);
+        if (fileExists(script, newServer) !== true) {
+            scp(script, newServer);
+        }
+        var threads = fLib.threadCount(newServer, script);
+        exec(script, newServer, threads, target);
+        tprint("purchased new server " + newServer + " and running " + script + " with " + threads + " threads");
     }
-
-
-// sleep until smallest server is upgradeable
+    // sleep until smallest server is upgradeable
     var newMoney = getServerMoneyAvailable("home");
     var newSmallest = fLib.getSmallestServer();
     var newSmallestRam = getServerMaxRam(newSmallest);
-        
-    while (getServerCost(newSmallestRam*2) < newMoney) {
+
+    while (getServerCost(newSmallestRam * 2) < newMoney) {
         newMoney = getServerMoneyAvailable("home");
         newSmallest = fLib.getSmallestServer();
         newSmallestRam = getServerMaxRam(newSmallest);
 
+        tprint("purchase server script sleeping");
         sleep(30000);
-        }
+    }
 }

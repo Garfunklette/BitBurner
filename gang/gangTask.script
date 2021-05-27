@@ -41,10 +41,25 @@ var rootKits = ["NUKE Rootkit","Soulstealer Rootkit","Demon Rootkit","Hmap Node"
 for (i = 0; i < memberCount; i++) {
   
 member = gang.getMemberInformation(gangList[i]);
-  var equipmentList = member.upgrades;
-  for (k of rootKits) {
-    gang.purchaseEquipment(member,k);
-  }
+
+var equipmentList = member.upgrades;
+var toBuy = rootKits;
+for (k = 0; k < toBuy.length; k++) {
+  for (m = 0; m < equipmentList.length; m++) {
+    if (toBuy[k] === equipmentList[m]) {
+      toBuy.slice(m);
+      k--;
+    }
+    for (n = 0; n < toBuy.length, n++) {
+    money = getServerMoneyAvailable("home");
+    if (gang.getEquipmentCost(toBuy[n] < money) {
+        gang.purchaseEquipment(member,toBuy[n]);
+      }
+    }    
+    
+    
+    
+ }
 
   var mTask = member.task;
   mHack = member.hack;

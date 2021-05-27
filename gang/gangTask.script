@@ -1,23 +1,71 @@
+//buy equipment to boost hack skill
 //assign tasks based on member hack level, member level of respect, wantedLevelGainRate
 //remember to sleep for a few seconds to give it a chance to process
 //
-
+import * as fLib from "functionLibrary.script";
 
 var gangList = gang.getMemberNames();
+var memberCount = gangList.length;
+var maxTrain = gang.getMemberInformation(gangList[0]).hack;
 
-for (i = 0; i < gangList.length; i++) {
-  var member = gang.getMemberInformation(gangList[i]);
-    var mTask = member.task;
+//start while loop
+while(true) {
+//get maximum hack level, set minTrain = 2/3
+
+for (h = 0; h < memberCount; h++) {
+  var member = gang.getMemberInformation(gangList[i]));
     var mHack = member.hack;
-  if(mHack < 100) {
-    if(mTask != "Train Hacking")
-        setTask(member.name,"Train Hacking");
+    if (mHack > maxTrain) {
+      maxTrain = mHack;
+      }
+}
+var minTrain = Math.ceiling(2/3*maxTrain);
+
+
+
+// define task lists / tasks. will need to create gangTasks function to sort arrays.
+
+var gangType = gang.getGangInformation().isHacking;
+//var respectTaskList = fLib.gangTasks(gangType,"respect");
+var respectTaskList = ["Cyberterrorism","Money Laundering","Plant Virus","DDoS Attacks","Fraud & Counterfeiting","Identity Theft","Phishing","Ransomware","Train Hacking"]
+//var trainTaskList = fLib.gangTasks(gangType,"train");
+var trainTaskList = ["Train Hacking"];
+//var lowerWantedLevelTaskList = fLib.gangTasks(gangType,"wanted");
+var lowerWantedLevelTaskList = ["Ethical Hacking"];
+var newWantedLevelGainRate = 0;
+
+// buy all rootKits for each gang member
+var rootKits = ["NUKE Rootkit","Soulstealer Rootkit","Demon Rootkit","Hmap Node","Jack the Ripper"];
+
+// set tasks based on skill level and gang wanted rate
+for (i = 0; i < memberCount; i++) {
+  
+member = gang.getMemberInformation(gangList[i]);
+  var equipmentList = member.upgrades;
+  for (k of rootKits) {
+    gang.purchaseEquipment(member,k);
+  }
+
+  var mTask = member.task;
+  mHack = member.hack;
+  if(mHack < minTrain) {
+    if(mTask != "Train Hacking") {
+        setTask(member.name,trainTaskList[0]);
     }
   }
   else { 
     //try a task and see if it ruins wantedLevelGainRate
     //if can't do any task without ruining wanted level gain rate, set lower wantedLevelGainRate task
-    for (j = 0; j < taskList.length);
+    for (j = 0; j < respectTaskList.length; j++);
+        setTask(member.name,respectTaskList[j];
+        sleep(5000);
+        if (gang.getGangInformation().wantedLevelGainRate > 0) {
+          setTask(member.name,mTask);
+        }
+        else {
+          break;
+        }
   }
   
+}
 }

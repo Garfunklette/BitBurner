@@ -2,7 +2,11 @@ var hackingLevel = getHackingLevel();
 var studying = FALSE;
 while(hackingLevel < 53) {
 
-studying = universityCourse("Rothman University", "Study Computer Science");
+if(studying === FALSE) {
+  studying = universityCourse("Rothman University", "Study Computer Science");
+}
+sleep(300000);
+
 hackingLevel = getHackingLevel();
 
 print("Studying? "+studying);

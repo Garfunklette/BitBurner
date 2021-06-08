@@ -1,0 +1,24 @@
+//define join parameters
+//check join parameters
+//execute necessary actions
+//join faction
+
+/*
+The List in Order
+CyberSec,NiteSec,The Black Hand,NWO,Chongqing,BitRunners,Clarke Incorporated,KuaiGong International
+*/
+
+//CyberSec, NiteSec, Black Hand, BitRunners
+//Backdoor (CSEC, avmnite-02h, I.I.I.I, run4theH111z), hacking level (59,211,346,511), ports required(1,2,3,4), home ram (0, 32, 64, 128)
+
+//Chongqing
+//Travel to Chongqing, money($20m)
+
+//NWO, Clarke Incorporated, KuaiGongInternational
+//company rep 200,000
+
+var faction = args[0];
+
+//Definitions
+
+function Server(type,levelReq,portReq,homeRamReq,locationReq,moneyReq,companyRepReq) {

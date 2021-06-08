@@ -1,0 +1,10 @@
+//Faction,Type,Server,hackingLevel,ports,homeram,location,money,companyrep
+CyberSec,backdoor,CSEC,59,1,0,,,
+NiteSec,backdoor,avmnite-02h,211,2,32,,,
+The Black Hand,backdoor,I.I.I.I,346,3,64,,,
+Bitrunners,backdoor,run4theh111z,511,4,128,,,
+BitNode,hack,w0r1d_d43m0n,3000,5,,,,
+Chongqing,travel,,,,,Chongqing,20000000,
+NWO,job,,,,,,,200000
+Clarke Incorporated,job,,,,,,,200000
+KuaiGongInternational,job,,,,,,,200000

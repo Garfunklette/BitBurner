@@ -1,0 +1,9 @@
+var hackingLevel = getHackingLevel();
+var studying = FALSE;
+while(hackingLevel < 53) {
+
+studying = universityCourse("Rothman University", "Study Computer Science");
+hackingLevel = getHackingLevel();
+
+print("Studying? "+studying);
+}

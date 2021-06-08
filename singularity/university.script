@@ -1,13 +1,19 @@
 var hackingLevel = getHackingLevel();
 var studying = FALSE;
+
+if(isBusy() === TRUE) {
+  stopAction();
+}
+
 while(hackingLevel < 53) {
 
-if(studying === FALSE) {
-  studying = universityCourse("Rothman University", "Study Computer Science");
-}
-sleep(300000);
+  if(studying === FALSE) {
+    studying = universityCourse("Rothman University", "Study Computer Science");
+  }
 
-hackingLevel = getHackingLevel();
+  sleep(300000);
 
-print("Studying? "+studying);
+  hackingLevel = getHackingLevel();
+
+  print("Studying? "+studying);
 }

@@ -1,0 +1,37 @@
+//list of TOR files to buy
+//check if need to buy
+//check if money available
+//buy
+//if port buster purchased, re-run nuke script
+
+if(fileExists(TOR.exe) === FALSE) {
+  purchaseTOR();
+}
+
+if(fileExists(TOR.exe) === TRUE) {
+
+  var busters = ["brutessh.exe","ftpcrack.exe","relaysmtp.exe","httpworm.exe","sqlinject.exe"];
+  var services = ["AutoLink.exe","deepScanv1.exe",deepScanv2.exe"];
+  var newBusterBought = FALSE;
+
+
+  for (i = 0; i < busters.length, i++);
+    var program = busters[i];
+    if(fileExists(program) === FALSE) {
+      purchaseProgram(program);
+      newBusterBought = (purchaseProgram([i]) || newBusterBought);
+    }
+  }
+
+  for (j = 0; j < services.length; j++);
+    var program = services[j];
+    if(fileExists(program) === FALSE) {
+      purchaseProgram(program);
+    }
+  }
+
+  if (newBusterBought === TRUE) {
+    exec("hm_hackAll.script","home");
+  }
+
+}

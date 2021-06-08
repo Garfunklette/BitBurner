@@ -1,3 +1,4 @@
+//faction Augs still available?
 //define join parameters
 //check join parameters
 //execute necessary actions
@@ -21,4 +22,5 @@ var faction = args[0];
 
 //Definitions
 
-function Server(type,levelReq,portReq,homeRamReq,locationReq,moneyReq,companyRepReq) {
+fadText = read ("factionAccessData.txt",split(",");
+

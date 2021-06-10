@@ -4,29 +4,45 @@
 //buy
 //if port buster purchased, re-run nuke script
 
+
+var busters = ["brutessh.exe","ftpcrack.exe","relaysmtp.exe","httpworm.exe","sqlinject.exe"];
+var services = ["AutoLink.exe","deepScanv1.exe",deepScanv2.exe"];
+
+var exesToBuy = busters.length+services.length;
+
+while (exesToBuy > 0);
+
 if(fileExists(TOR.exe) === FALSE) {
   purchaseTOR();
 }
 
 if(fileExists(TOR.exe) === TRUE) {
 
-  var busters = ["brutessh.exe","ftpcrack.exe","relaysmtp.exe","httpworm.exe","sqlinject.exe"];
-  var services = ["AutoLink.exe","deepScanv1.exe",deepScanv2.exe"];
   var newBusterBought = FALSE;
 
 
   for (i = 0; i < busters.length, i++);
     var program = busters[i];
+    var boughtYes = FALSE
     if(fileExists(program) === FALSE) {
-      purchaseProgram(program);
+      boughtYes = purchaseProgram(program);
+      if(boughtYes === TRUE) {
+        exesToBuy--;
+        }
       newBusterBought = (purchaseProgram([i]) || newBusterBought);
     }
   }
 
   for (j = 0; j < services.length; j++);
     var program = services[j];
+    boughtYes = FALSE;
     if(fileExists(program) === FALSE) {
-      purchaseProgram(program);
+      
+      boughtYes = purchaseProgram(program);
+            if(boughtYes === TRUE) {
+        exesToBuy--;
+        }
+
     }
   }
 
@@ -34,4 +50,5 @@ if(fileExists(TOR.exe) === TRUE) {
     exec("hm_hackAll.script","home");
   }
 
+}
 }

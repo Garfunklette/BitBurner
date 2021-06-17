@@ -1,0 +1,8 @@
+//find maximum ram used per daemonTarget (including daemon)
+//distribute daemons based on bestTargetList and server size
+//when replacing server, check for existing running daemon scripts and re-add to bestTargetList
+
+//evaluate for best money script / function
+//analyze max number of threads script / function
+//
+

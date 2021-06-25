@@ -4,50 +4,50 @@
 //buy
 //if port buster purchased, re-run nuke script
 
+var busters = ["brutessh.exe", "ftpcrack.exe", "relaysmtp.exe", "httpworm.exe", "sqlinject.exe"];
+var services = ["AutoLink.exe", "deepScanv1.exe", "deepScanv2.exe"];
 
-var busters = ["brutessh.exe","ftpcrack.exe","relaysmtp.exe","httpworm.exe","sqlinject.exe"];
-var services = ["AutoLink.exe","deepScanv1.exe","deepScanv2.exe"];
+var exesToBuy = busters.length + services.length;
+print(exesToBuy);
 
-var exesToBuy = busters.length+services.length;
 
-while (exesToBuy > 0);
+purchaseTor();
 
-if(fileExists("TOR.exe") === false) {
-  purchaseTor();
+while (exesToBuy > 0) {
+
+    var newBusterBought = false;
+
+
+    for (i = 0; i < busters.length; i++) {
+        var program = busters[i];
+        var boughtYes = false;
+        if (fileExists(program) === false) {
+            boughtYes = purchaseProgram(program);
+            if (boughtYes === true) {
+                exesToBuy--;
+            }
+            newBusterBought = (boughtYes || newBusterBought);
+        }
+    }
+    print("busters checked");
+
+    for (j = 0; j < services.length; j++) {
+        var program = services[j];
+        boughtYes = false;
+        if (fileExists(program) === false) {
+            boughtYes = purchaseProgram(program);
+            if (boughtYes === true) {
+                exesToBuy--;
+            }
+
+        }
+    }
+    print("services checked");
+
+    if (newBusterBought === true && isRunning("hm_hackAll.script", "home") === false) {
+        exec("hm_hackAll.script", "home");
+        print("running hm_hackAll.script");
+
+    }
+
 }
-
-if(fileExists("TOR.exe") === true) {
-
-  var newBusterBought = false;
-
-
-  for (i = 0; i < busters.length; i++) {
-    var program = busters[i];
-    var boughtYes = false;
-    if(fileExists(program) === false) {
-      boughtYes = purchaseProgram(program);
-      if(boughtYes === true) {
-        exesToBuy--;
-        }
-      newBusterBought = (purchaseProgram([i]) || newBusterBought);
-    }
-  }
-
-  for (j = 0; j < services.length; j++);
-    var program = services[j];
-    boughtYes = false;
-    if(fileExists(program) === false) {
-      
-      boughtYes = purchaseProgram(program);
-            if(boughtYes === true) {
-        exesToBuy--;
-        }
-
-    }
-  }
-
-  if (newBusterBought === true) {
-    exec("hm_hackAll.script","home");
-  }
-
-

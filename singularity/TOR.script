@@ -12,21 +12,21 @@ var exesToBuy = busters.length+services.length;
 
 while (exesToBuy > 0);
 
-if(fileExists(TOR.exe) === FALSE) {
+if(fileExists(TOR.exe) === false) {
   purchaseTOR();
 }
 
-if(fileExists(TOR.exe) === TRUE) {
+if(fileExists(TOR.exe) === true) {
 
-  var newBusterBought = FALSE;
+  var newBusterBought = false;
 
 
   for (i = 0; i < busters.length, i++);
     var program = busters[i];
-    var boughtYes = FALSE
-    if(fileExists(program) === FALSE) {
+    var boughtYes = false
+    if(fileExists(program) === false) {
       boughtYes = purchaseProgram(program);
-      if(boughtYes === TRUE) {
+      if(boughtYes === true) {
         exesToBuy--;
         }
       newBusterBought = (purchaseProgram([i]) || newBusterBought);
@@ -35,18 +35,18 @@ if(fileExists(TOR.exe) === TRUE) {
 
   for (j = 0; j < services.length; j++);
     var program = services[j];
-    boughtYes = FALSE;
-    if(fileExists(program) === FALSE) {
+    boughtYes = false;
+    if(fileExists(program) === false) {
       
       boughtYes = purchaseProgram(program);
-            if(boughtYes === TRUE) {
+            if(boughtYes === true) {
         exesToBuy--;
         }
 
     }
   }
 
-  if (newBusterBought === TRUE) {
+  if (newBusterBought === true) {
     exec("hm_hackAll.script","home");
   }
 

@@ -1,0 +1,105 @@
+var serverList = getPurchasedServers();
+var noServers = serverList.length;
+var maxNoServers = getPurchasedServerLimit();
+var maxRam = Math.pow(2, 20);
+var serversAtMaxSize = 0;
+var minRam = 16;
+var money = 0;
+var smallestServer = [];
+var smallestServerRam = 33;
+
+while (serversAtMaxSize < maxNoServers) {
+
+    money = getServerMoneyAvailable("home");
+    serverList = getPurchasedServers();
+    noServers = serverList.length;
+    smallestServer = [];
+    smallestServerRam = 33;
+
+    for (i = maxRam; i > minRam; i = i / 2) {
+        serverCost = getPurchasedServerCost(i);
+
+        if (money > serverCost) {
+
+            if (noServers === maxNoServers) {
+                smallestServer = serverList[0];
+                smallestServerRam = getServerMaxRam(serverList[0]);
+                for (j = 0; j < noServers; j++) {
+                    servName = serverList[j];
+                    servRam = getServerMaxRam(servName);
+                    if (servRam < smallestServerRam) {
+                        smallestServer = servName;
+                        smallestServerRam = servRam;
+                        print("new smallestServerRam: " + smallestServerRam);
+                    }
+                }
+
+                if (i > smallestServerRam) {
+                    killall(smallestServer);
+                    sleep(5000);
+                    deleteServer(smallestServer);
+                    print("deleted " + smallestServer);
+                    sleep(5000);
+                }
+            }
+
+            serverList = getPurchasedServers();
+            noServers = serverList.length;
+
+            if (noServers < maxNoServers) {
+                newServ = purchaseServer("Serv" + i + "gb", i);
+                newServRam = i;
+                if (newServRam === maxRam) {
+                    serversAtMaxSize++;
+                }
+
+
+                if (serverExists(newServ) === true) {
+
+exec("bp_startPserverDaemons.script",newServ,1,newServ,newServRam);
+//run scripts
+/*var scripts = [];
+                    var scriptThreads = [];
+                    var scriptSArgs = [];
+                    if (newServRam > 64) {
+                        run("mx_scpScriptsPServer.script", 1, newServ);
+                        noDaemons = newServRam / 32;
+                        targetText = read("bp_bestTargets.txt");
+                        targets = targetText.split(",");
+                        if (noDaemons > targets.length) {
+                            noDaemons = targets.length;
+                        }
+                        for (j = 0; j < noDaemons; j++) {
+                            scripts.push = ("bp_daemon.script");
+                            scriptThreads.push(1);
+                            scriptSArgs.push(targets[j]);
+                        }
+                        sleep(5000);
+                    } else {
+                        scripts = ["early-hack-template.script"];
+                        scriptRam = getScriptRam(scripts[0]);
+                        scriptThreads = [Math.floor(newServRam / (scriptRam * 1.15))];
+                        scriptSArgs = [];
+                    }
+                    var noScripts = scripts.length;
+                    for (k = 0; k < noScripts; k++) {
+                        script = scripts[k];
+                        scriptRam = getScriptRam(script);
+                        threads = scriptThreads[k];
+                        scriptArgs = scriptSArgs[k];
+                        scp(script, newServ);
+                        if (threads > 0) {
+                            exec(script, newServ, threads, scriptArgs);
+
+                            sleep(5000);
+
+                            tprint("running " + script + " on server " + newServ + " with " + threads + "threads");
+                        } else {
+                            tprint("server not big enough to run script");
+                        }
+                    }
+                }*/
+            }
+        }
+    }
+}

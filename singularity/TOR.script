@@ -6,7 +6,7 @@
 
 
 var busters = ["brutessh.exe","ftpcrack.exe","relaysmtp.exe","httpworm.exe","sqlinject.exe"];
-var services = ["AutoLink.exe","deepScanv1.exe",deepScanv2.exe"];
+var services = ["AutoLink.exe","deepScanv1.exe","deepScanv2.exe"];
 
 var exesToBuy = busters.length+services.length;
 
@@ -21,9 +21,9 @@ if(fileExists(TOR.exe) === true) {
   var newBusterBought = false;
 
 
-  for (i = 0; i < busters.length, i++);
+  for (i = 0; i < busters.length; i++) {
     var program = busters[i];
-    var boughtYes = false
+    var boughtYes = false;
     if(fileExists(program) === false) {
       boughtYes = purchaseProgram(program);
       if(boughtYes === true) {
@@ -50,5 +50,4 @@ if(fileExists(TOR.exe) === true) {
     exec("hm_hackAll.script","home");
   }
 
-}
-}
+

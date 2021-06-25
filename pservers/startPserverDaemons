@@ -1,0 +1,37 @@
+//start number of hack daemons such that they have enough ram to hack and are targeting
+//the best targets;
+//define amount of ram required through function
+
+
+var hostname = args[0];
+var hostRam = args[1];
+
+function getMaxWHGRAM(target) {
+
+    var hackLevel = getHackingLevel();
+    var thisTarget = (target || "n00dles");
+    var serverMaxMoney = getServerMaxMoney(thisTarget);
+    var percentageToSteal = 0.5;
+    var minSecurity = getServerMinSecurityLevel(thisTarget);
+    var serverLevel = getServerRequiredHackingLevel(thisTarget);
+
+    var growthFactor = Math.ceil(serverMaxMoney);
+    var threadsNeededGrow = growthAnalyze(thisTarget, growthFactor);
+
+    var hackValue = serverMaxMoney * percentageToSteal;
+    var threadsNeededHack = hackAnalyzeThreads(thisTarget, hackValue);
+
+
+    var threadsNeededWeaken = Math.ceil((0.002 * threadsNeededHack + 0.004 * threadsNeededGrow) / 0.05);
+
+    var maxThreads = Math.max(threadsNeededWeaken, threadsNeededGrow, threadsNeededHack);
+
+    var growSThreads = getScriptRam("grow.script");
+    var hackSThreads = getScriptRam("hack.script");
+    var weakenSThreads = getScriptRam("weaken.script");
+
+    var maxSRAM = Math.max(growSThreads, hackSThreads, weakenSThreads);
+    var maxTRAM = maxThreads * maxsRAM;
+
+    return maxTRAM;
+}

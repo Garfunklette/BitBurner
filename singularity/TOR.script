@@ -12,11 +12,11 @@ var exesToBuy = busters.length+services.length;
 
 while (exesToBuy > 0);
 
-if(fileExists(TOR.exe) === false) {
+if(fileExists("TOR.exe") === false) {
   purchaseTOR();
 }
 
-if(fileExists(TOR.exe) === true) {
+if(fileExists("TOR.exe") === true) {
 
   var newBusterBought = false;
 

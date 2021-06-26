@@ -35,3 +35,21 @@ function getMaxWHGRAM(target) {
 
     return maxTRAM;
 }
+
+var targetText = read("bestTargets.txt");
+var targetList = targetText.split(",");
+var proposedUsedRam = 0;
+var daemonTarget = [];
+var noTargets = targetList.length;
+
+while (proposedUsedRam < hostRam) {
+    for(i = 0; i < noTargets; i++) {
+        var target = targetList[i];
+        targetMaxRamUsage = getMaxWHGRAM(target);
+        if(proposedUsedRam + targetMaxRamUsage < hostRam) {
+            exec("bp_scpDaemonScripts.script",target);
+            sleep(5000);
+            exec("bp_daemon",target);
+            proposedUsedRam = proposedUsedRam + targetMaxRamusage;
+    }
+}

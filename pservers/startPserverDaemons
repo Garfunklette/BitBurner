@@ -47,7 +47,7 @@ while (proposedUsedRam < hostRam) {
         var target = targetList[i];
         targetMaxRamUsage = getMaxWHGRAM(target);
         if(proposedUsedRam + targetMaxRamUsage < hostRam) {
-            exec("bp_scpDaemonScripts.script",target);
+            exec("bp_scpDaemonScripts.script","home",1,target);
             sleep(5000);
             exec("bp_daemon",target);
             proposedUsedRam = proposedUsedRam + targetMaxRamusage;

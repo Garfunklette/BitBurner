@@ -1,0 +1,25 @@
+//get list of current factions
+//get list of unbought augs with enough faction rep
+//sort by cost most to least
+//purchase augs if money > aug cost
+var augList = [];
+var factionList = getCharacterInformation().factions;
+noFactions = factionList.length;
+var augFactions = [];
+var augReps = [];
+var augDollars = [];
+
+for (i = 0; i < noFactions; i++) {
+faction = factionList[i];
+factionAugList = getAugmentationsFromFaction(faction);
+noFactionAugs = factionAugList.length;
+for (j = 0; j < noFactionAugs; j++) {
+aug = factionAugList[j];
+augRepCost = getAugmentationCost(aug)[2];
+augDollarCost = getAugmentationCost(aug)[1];
+augList.push(aug);
+augReps.push(augRepCost);
+augDollars.push(augDollarCost);
+augFactions.push(faction);
+}
+

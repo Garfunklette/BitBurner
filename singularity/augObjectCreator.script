@@ -1,0 +1,21 @@
+/*
+augment ID
+augment Name
+owned
+augment rep cost
+augment money cost
+factions
+*/
+
+
+
+function Aug(name, owned, repCost, moneyCost, factions) {
+this.name = name;
+this.owned = owned;
+this.cost = {
+repCost: repCost,
+moneyCost: moneyCost};
+this.factions = factions;
+}
+
+let aug1 = new Aug(

@@ -5,6 +5,7 @@ owned
 augment rep cost
 augment money cost
 factions
+prereq
 */
 
 
@@ -16,6 +17,7 @@ this.cost = {
 repCost: repCost,
 moneyCost: moneyCost};
 this.factions = factions;
+this.prereq = prereq;
 }
 
 let aug1 = new Aug(

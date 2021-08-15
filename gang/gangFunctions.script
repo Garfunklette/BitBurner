@@ -1,3 +1,21 @@
 function upgradeGear() {
 
 }
+
+function setTask(name) {
+//if strength < 15, training
+gm = gang.getMemberInformation(name);
+if (gm.str < 15) {
+gang.setMemberTask(name,"Training");
+}
+else {
+g = gang.getGangInformation();
+if(g.wantedLevel > 1.05) {
+gang.setMemberTask(name,"Vigilante Justice");
+} else {
+gang.setMemberTask(name,"Mug");
+
+//"Traffick Arms", "Strongarm Citizens","Terrorism"
+
+}
+}

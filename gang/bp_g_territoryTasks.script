@@ -1,10 +1,10 @@
 //set to training if str < 15
 //set to vigilante if wantedLevel > 1.05
 //set to money task if moneyGainRate < x
-//  mug
-//  strongarm civilians  
-//  terrorism, (low respect)
-//  traffick arms, (high respect)
+//  mug (str > 15)
+//  strongarm civilians  (str > 630)
+//  terrorism, (low respect) (str > 1000)
+//  traffick arms, (high respect) (str > 1000)
 //  
 //set to territory otherwise
 

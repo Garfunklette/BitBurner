@@ -1,0 +1,29 @@
+//control chaos
+//stay healthy
+//stay stamina riffic
+//train sufficiently
+//advance
+//complete tasks
+//complete ops
+//recruit
+
+
+
+function maxChaosCity() {
+var cities = ["Aevum","Chongqing","Sector-12","New Tokyo","Ishima","Volhaven"]
+
+var cityChaos = []
+for(i in cities) {
+city = cities[i];
+let city.name = cities[i];
+let city.chaos = bladeburner.getCityChaos(city);
+push.cityChaos(city);
+}
+
+cityChaos.sort(function(a, b) {
+    return a.chaos - b.chaos;
+});
+}
+
+return(cityChaos[0].name);
+}

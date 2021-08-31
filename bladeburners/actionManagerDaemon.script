@@ -27,3 +27,55 @@ cityChaos.sort(function(a, b) {
 
 return(cityChaos[0].name);
 }
+
+
+function City(name) {
+	this.name = name;
+	this.chaos = bladeburner.getCityChaos(name);
+	this.pop = bladeburner.getCityEstimatedPopulation(name);
+	this.comm = bladeburner.getCityEstimatedCommunities(name);
+}
+
+//   var cities = ["Chongqing","Aevum", "Sector-12", "New Tokyo", "Ishima", "Volhaven"];
+
+cities = [];
+
+cities.push(chongqing = new City("Chongqing"));
+cities.push(aevum = new City("Aevum"));
+cities.push(sector12 = new City("Sector-12"));
+cities.push(newTokyo = new City("New Tokyo"));
+cities.push(ishima = new City("Ishima"));
+cities.push(volhaven = new City("Volhaven"));
+/*
+print("Name, Chaos, Population, Communities"); 
+for(i in cities) {
+    print(cities[i].name+", "+nFormat(cities[i].chaos,"0.00a")+", "+nFormat(cities[i].pop,"0.00a")+", "+nFormat(cities[i].comm,"0.00a"));
+}
+*/
+//chaos manager
+
+/*
+var maxChaos = cities.map(function(arr) {
+	return Math.max.apply(null, arr.map(function(o) { return o.value; }));
+});
+tprint(maxChaos);
+*/
+
+function staminaCheck() {
+	stam = bladeburner.getStamina();
+	stamPerc = stam[0] / stam[1] * 100;
+	return stamPerc;
+}
+
+while(true) {
+	var stamP = staminaCheck();
+	if(stamP < 20) {
+		//go to min chaos city
+		bladeburner.startAction("general","Investigation");
+	} else {
+		if()
+		//
+	}
+}
+
+

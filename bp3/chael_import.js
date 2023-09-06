@@ -28,7 +28,7 @@ async function importFiles(ns) {
   for (let file of files) {
     let remoteFileName = `${config.rootUrl}bp3/${file}`;
   ns.print(remoteFileName);
-    let result = await ns.wget(remoteFileName, `${getFolder()}${file}`);
+    let result = await ns.wget(remoteFileName, `/${getFolder()}/${file}`);
     filesImported = filesImported && result;
     ns.tprint(`File: ${file}: ${result ? '✔️' : '❌'}`);
   }

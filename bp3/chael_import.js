@@ -1,5 +1,5 @@
 let config = {
-  folder: 'scripts',
+  folder: '',
   rootUrl: 'https://raw.githubusercontent.com/Garfunklette/BitBurner/main/',
   serverPrefix: 'purch',
 };
